@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="EXT4/resources/css/ext-all.css" />
+    <script type="text/javascript" src="EXT4/ext-all-dev.js"></script>
+    <style type="text/css">
+        .field-margin {
+            margin-left: 10%;
+            margin-top:10px;
+        }
+    </style>
+    <script>
+        Ext.onReady(function(){
+            var formPanel=Ext.create('Ext.form.Panel',{
+                title: 'Форма авторизации',
+                width: 300,
+                height:200,
+                layout: 'anchor',
+                defaults: {
+                    anchor: '80%'
+                },
+                renderTo: Ext.getBody(),
+                items:[{
+                    xtype: 'textfield',
+                    fieldLabel: 'Логин',
+                    name: 'login',
+                    vtype:'alphnum',
+                    labelAlign: 'top',
+                    cls: 'field-margin',
+                    flex: 1
+                }, {
+                    xtype: 'textfield',
+                    fieldLabel: 'Электронная почта',
+                    name: 'mail',
+                    vtype:'email',
+                    labelAlign: 'top',
+                    cls: 'field-margin',
+                    flex: 1
+                }],
+                // кнопки формы
+                buttons: [{
+                    text: 'Оправить',
+                    handler: function() {
+                        // действие отправки
+                    }
+                }, {
+                    text: 'Отмена',
+                    handler: function() {
+                        // действие отмены
+                    }
+                }],
+            });
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

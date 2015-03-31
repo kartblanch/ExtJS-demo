@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="EXT4/resources/css/ext-all.css" />
+    <script type="text/javascript" src="EXT4/ext-all-dev.js"></script>
+    <script type="text/javascript">
+
+        Ext.onReady(function () {
+            var formPanel = Ext.create('Ext.Panel', {
+                title: 'Форма ввода',
+                width: 250,
+                autoHeight: true,
+                bodyPadding: 10,
+                defaults: {
+                    labelWidth: 100
+                },
+                items: [
+                    {
+                        xtype: 'textfield',
+                        fieldLabel: 'Ваше имя:',
+                        allowBlank: false,
+                        name: 'name'
+                    },
+                    {
+                        xtype: 'button',
+                        text: 'Нажми',
+                        height: 30,
+                        margin: '0 100',
+                        renderTo: Ext.getBody(),
+                        handler: function () {
+                            var fname = formPanel.down('textfield[name=name]').getValue();
+                            alert("Добрый день " + fname + "!")
+                        }
+                    }
+                ],
+                renderTo: Ext.getBody()
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>
