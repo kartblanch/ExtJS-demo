@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="EXT4/resources/css/ext-all.css" />
+    <link rel="stylesheet" type="text/css" href="EXT4/resources/css/ext-all.css"/>
     <script type="text/javascript" src="EXT4/ext-all-dev.js"></script>
     <script type="text/javascript">
 
@@ -25,13 +25,13 @@
                     },
                     {
                         xtype: 'button',
-                        text: 'Нажми',
+                        text: 'Нажми меня',
                         height: 30,
                         margin: '0 100',
                         renderTo: Ext.getBody(),
                         handler: function () {
-                            var fname = formPanel.down('textfield[name=name]').getValue();
-                            alert("Добрый день " + fname + "!")
+                            var fname = formPanel.down('textfield[name=name]').getValue(); //взять введенное значение с текстового поля
+                            alert("Добрый день, " + fname + " !")
                         }
                     }
                 ],

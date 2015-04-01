@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="EXT4/resources/css/ext-all.css"/>
+    <script type="text/javascript" src="EXT4/ext-all-dev.js"></script>
+    <script type="text/javascript">
+
+
+        Ext.onReady(function(){
+            Ext.create('Ext.data.Store', {
+                storeId:'simpsonsStore',
+                fields:['name', 'email', 'phone'],
+                data: [
+                    {"name":"Lisa", "email":"lisa@simpsons.com", "phone":"555-111-1224"},
+                    {"name":"Bart", "email":"bart@simpsons.com", "phone":"555--222-1234"},
+                    {"name":"Homer", "email":"home@simpsons.com", "phone":"555-222-1244"},
+                    {"name":"Marge", "email":"marge@simpsons.com", "phone":"555-222-1254"}
+                ]
+            });
+
+            Ext.create('Ext.grid.Panel', {
+                title: 'Семейка Симпсонов',
+                store: Ext.data.StoreManager.lookup('simpsonsStore'),
+
+                columns: [
+                    {header: 'Имя',  dataIndex: 'name', editor: 'textfield'},
+                    {header: 'Почта', dataIndex: 'email', flex:1,
+                        editor: {
+                            xtype: 'textfield',
+                            allowBlank: false
+                        }
+                    },
+                    {header: 'Номер телефона', dataIndex: 'phone', }, //столбец нельзя изменить, т к отсутствует  " editor: 'textfield' "
+                ],
+                selType: 'rowmodel',
+                plugins: [
+                    Ext.create('Ext.grid.plugin.RowEditing', {
+                        clicksToEdit: 1
+                    })
+                ],
+                height: 200,
+                width: 400,
+                renderTo: Ext.getBody()
+            });
+
+        });
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -3,30 +3,41 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="EXT4/resources/css/ext-all.css" />
+    <link rel="stylesheet" type="text/css" href="EXT4/resources/css/ext-all.css"/>
     <script type="text/javascript" src="EXT4/ext-all-dev.js"></script>
     <style type="text/css">
         .field-margin {
             margin-left: 10%;
-            margin-top:10px;
+            margin-top: 10px;
         }
     </style>
     <script>
-        Ext.onReady(function(){
-            var formPanel=Ext.create('Ext.form.Panel',{
+        Ext.onReady(function () {
+            //собственный валидатор
+            var passEmailVType = {
+                passEmail: function (val, field) {
+                    var passEmailRegex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+                    return passEmailRegex.test(val);
+                },
+                passEmailText: 'Введите правильную почту!'
+            };
+
+            Ext.apply(Ext.form.field.VTypes, passEmailVType); //применяет объект валидации синглтону Ext.form.field.VTypes, который и содержит все объекты валидации
+
+            var formPanel = Ext.create('Ext.form.Panel', {
                 title: 'Форма авторизации',
                 width: 300,
-                height:200,
+                height: 200,
                 layout: 'anchor',
                 defaults: {
                     anchor: '80%'
                 },
                 renderTo: Ext.getBody(),
-                items:[{
+                items: [{
                     xtype: 'textfield',
                     fieldLabel: 'Логин',
                     name: 'login',
-                    vtype:'alphnum',
+                    vtype: 'alphnum', //alphnum: позволяет вводить только алфавитно-цифровые символы
                     labelAlign: 'top',
                     cls: 'field-margin',
                     flex: 1
@@ -34,23 +45,25 @@
                     xtype: 'textfield',
                     fieldLabel: 'Электронная почта',
                     name: 'mail',
-                    vtype:'email',
+                    vtype: 'passEmail',  //есть стандартный набор -  email: проверяет правильность ввода адреса электронной почты
                     labelAlign: 'top',
                     cls: 'field-margin',
                     flex: 1
                 }],
                 // кнопки формы
                 buttons: [{
+                    name: 'ok',
                     text: 'Оправить',
-                    handler: function() {
+                    formBind: true, // делает кнопку не доступной при ошибке валидации
+                    handler: function () {
                         // действие отправки
                     }
                 }, {
                     text: 'Отмена',
-                    handler: function() {
+                    handler: function () {
                         // действие отмены
                     }
-                }],
+                }]
             });
         });
     </script>
