@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="ext/resources/css/ext-all.css"/>
+    <script type="text/javascript" src="ext/ext-all-dev.js"></script>
+    <script type="text/javascript">
+
+
+
+        Ext.onReady(function(){
+            var tree = Ext.create('Ext.data.TreeStore', {
+                root: {
+                    text:"Программисты 26 кабинета",
+                    expanded: true,
+                    children: [{
+                        text: "Александр",
+                        leaf: true
+                    },{
+                        text: "Антон",
+                        leaf: true
+                    },{
+                        text: "Алексей",
+                        leaf: true
+                    },
+                        {
+                            text: "Наталья",
+                            leaf: true
+                        },
+                        {
+                            text: "Сергей",
+                            leaf: true
+                        },
+                        {
+                            text: "Владимир",
+                            leaf: true
+                        }]
+                }
+            });
+            var treePanel = Ext.create('Ext.tree.Panel', {
+                viewConfig: {plugins: {ptype: 'treeviewdragdrop'}},
+                title: 'Программисты 26 кабинета',
+                store: tree,
+                width: 180,
+                rootVisible: true,
+                region: 'west'
+            });
+            var centerPanel=Ext.create('Ext.panel.Panel', {
+                title: 'Добавить/Удалить программиста',
+                region: 'center',
+                bodyPadding:10,
+                items:[{
+                    xtype: 'textfield',
+                    id: 'txt',
+                    height: 20
+                },{
+                    xtype: 'button',
+                    width:60,
+                    height: 20,
+                    text:'Добавить',
+                    handler: function() {
+                        // получаем введенное в текстовое поле значение
+                        var newNode=centerPanel.getComponent('txt').getValue();
+                        // Используем метод appendChild для добавления нового объекта
+                        treePanel.getRootNode().appendChild({
+                            text: newNode,
+                            leaf: true
+                        });
+                    }
+                },{
+                    xtype: 'button',
+                    width:60,
+                    height: 20,
+                    margin: '0 0 0 20',
+                    text:'Удалить',
+                    handler: function() {
+                        // получаем выделенный узел для удаления
+                        var selectedNode=treePanel.getSelectionModel().getSelection()[0];
+                        // если таковой имеется, то удаляем
+                        if(selectedNode)
+                        {
+                            selectedNode.remove(true);
+                        }
+                    }
+                }]
+            });
+            Ext.create('Ext.panel.Panel', {
+                layout : 'border',
+                width: 400,
+                height: 180,
+                padding:10,
+                items : [treePanel, centerPanel],
+                renderTo: Ext.getBody()
+            });
+        });
+
+
+
+
+        </script>
+</head>
+<body>
+
+</body>
+</html>
